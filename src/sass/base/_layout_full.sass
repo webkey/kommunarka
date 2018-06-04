@@ -6,7 +6,7 @@ html
 	font-size: 62.5%
 
 	// блокировка скролла
-	//&.css-scroll-fixed
+	&.css-scroll-fixed
 		+scroll-blocked()
 
 body
@@ -33,7 +33,7 @@ body
 
 // выравнивание текстовых элементов на странице статьи (контент обернут в .layout-article)
 // и их максимальная ширина
-//.layout-article
+.layout-article
 	padding: $text-layout-space
 
 	+media('<tab-lg')
@@ -90,7 +90,7 @@ body
 		+padding-horizontal(nth($text-layout-space--sm, 2))
 
 // максимальная ширина альтернативных элементов на внутренней (текстовой) странице
-//.max-wrap-flood
+.max-wrap-flood
 	max-width: #{$flood-layout-width + (nth($text-layout-space, 2))*2}
 
 	+media('<tab-lg')
@@ -101,7 +101,7 @@ body
 
 // выравнивание альтернативных элементов на внутренней (текстовой) странице
 // и их максимальная ширина
-//.layout-flood
+.layout-flood
 	max-width: #{$flood-layout-width + (nth($text-layout-space, 2))*2}
 	+padding-horizontal((nth($text-layout-space, 2)))
 	+push-auto
@@ -118,7 +118,7 @@ body
 		max-width: none
 
 // элеметы с отступами по бокам
-//.layout-wide
+.layout-wide
 	+padding-horizontal((nth($text-layout-space, 2)))
 
 	+media('<tab-lg')
@@ -131,7 +131,7 @@ body
 		max-width: none
 
 // элеметы без отступов по бокам
-//.layout-full-width
+.layout-full-width
 
 	p, ul, ol, h1, h2, h3, h4, h5, h6, hr
 		max-width: none
@@ -184,9 +184,6 @@ body
 	margin: 86px 0 0
 	background-color: #5a534f
 
-	+media('<mob-lg')
-		margin-top: 70px
-
 .header__holder
 	display: flex
 	justify-content: space-between
@@ -195,9 +192,6 @@ body
 	padding-left: nth($logo-size, 2)
 	z-index: 5
 	+clear
-
-	+media('<mob-lg')
-		padding: 74px 0 0
 
 	&::before, &::after
 		content: ""
@@ -213,15 +207,10 @@ body
 	background: url(../../img/logo.png) no-repeat
 	width: nth($logo-size, 2)
 	height: nth($logo-size, 1)
-	margin: -#{round(nth($logo-size, 1)/2-10)} 0 0
+	margin: -#{round(nth($logo-size, 2)/2-21)} 0 0
 	text-indent: -9999px
 	overflow: hidden
 	z-index: 5
-
-	+media('<mob-lg')
-		left: 50%
-		top: 0
-		margin-left: -#{round(nth($logo-size, 2)/2)}
 
 	a, & > span
 		display: block
@@ -236,11 +225,6 @@ body
 
 .nav__list
 	+clear
-
-	+media('<mob-lg')
-		display: flex
-		flex-wrap: wrap
-		justify-content: center
 
 	li
 		float: left
@@ -265,8 +249,8 @@ body
 
 /* === NAVIGATION end ===
 
-///* === SIDEBAR ===
-//.sidebar
+/* === SIDEBAR ===
+.sidebar
 	display: inline
 	float: left
 	margin: 0 0 0 -100%
@@ -277,10 +261,10 @@ body
 	+media('<tab-lg')
 		display: none
 
-///* === SIDEBAR end ===
+/* === SIDEBAR end ===
 
-///* === ASIDE ===
-//.aside
+/* === ASIDE ===
+.aside
 	display: inline
 	float: right
 	margin: 0 0 0 -#{$aside-width}
@@ -290,7 +274,7 @@ body
 	+media('<desk-lg')
 		display: none
 
-///* === ASIDE end ===
+/* === ASIDE end ===
 
 /* === FOOTER ===
 .footer

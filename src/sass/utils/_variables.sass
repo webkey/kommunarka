@@ -6,23 +6,23 @@
 $breakpoints: ('desk-qhd': 2560px, 'desk-hd': 1920px, 'desk-lg': 1600px, 'desk-ml': 1440px, 'desk-md': 1366px, 'desk-sm': 1200px, 'tab-lg': 992px, 'tab-sm': 768px, 'mob-lg': 640px, 'mob-md': 480px, 'mob-sm': 320px)
 
 // base
-$font-size: 1.6rem !default
+$font-size: 1.8rem !default
 $line-height: round-float(2.4rem/$font-size, 2) !default
 // ===============
-$font-size--sm: 1.4rem !default
+$font-size--sm: 1.6rem !default
 $line-height--sm: round-float(2.4rem/$font-size--sm, 2) !default
 // ===============
-$font-size--less: 1.2rem !default
+$font-size--less: 1.4rem !default
 $line-height--less: round-float(2.0rem/$font-size--less, 2) !default
 
 // =======h1========
-$font-size-h1: 4.8rem !default
-$line-height-h1: round-float(6.0rem/$font-size-h1, 2) !default
+$font-size-h1: 7.2rem !default
+$line-height-h1: round-float(10rem/$font-size-h1, 2) !default
 // md ===
-$font-size-h1--md: 3.6rem !default
+$font-size-h1--md: 6rem !default
 $line-height-h1--md: round-float(4.8rem/$font-size-h1--md, 2) !default
 // sm ===
-$font-size-h1--sm: 3.0rem !default
+$font-size-h1--sm: 5rem !default
 $line-height-h1--sm: round-float(4.2rem/$font-size-h1--sm, 2) !default
 
 // =======h2========
@@ -62,19 +62,19 @@ $bottom-space--sm: round-float($font-size*$line-height*0.75, 1) !default
 
 // =======Цветовая схема========
 // цвет бренда
-$base-color: #ffa43f !default
-$base-color-alt: lightskyblue !default
+$base-color: #c4161c !default
+$base-color-alt: #a78a45 !default
 // главные контрастные цвета (обычно, белый и черный)
 $text-color-base: black !default
 $bg-color-base: white !default
 // цвет фона страницы
-$bg-color: #e5e5e5 !default
+$bg-color: #d4c0b3 !default
 // цвет фона элементов выделяющихся на страницы
 $bg-color-alt: #f3f3f3 !default
 // цвет основного текста
-$text-color: #262626 !default
+$text-color: #403b38 !default
 // цвет основных заголовков
-$title-color: black !default
+$title-color: #403b38 !default
 // цвет текста светлее основного
 $text-color-light: gray !default
 // цвет ссылки
@@ -92,16 +92,16 @@ $user-content: user-content !default
 
 // =======Layout========
 // отступы для всего сайта
-$page-layout-space: 18px 20px !default // v h
+$page-layout-space: 0 20px !default // v h
 // максимальная ширина сайта
-$page-layout-width: 1920px !default
+$page-layout-width: 1600px !default
 // минимальные отступы у текствого блока
 $text-layout-space: 50px 60px !default // v h
 $text-layout-space--md: 25px 30px !default // v h
 $text-layout-space--sm: 13px 15px !default // v h
 $text-layout-space--mob: 8px 10px !default // v h
 // максимальная ширина текстового блока
-$text-layout-width: 800px !default
+$text-layout-width: 960px !default
 // максимальная ширина текстового блока выходящего за пределы текста
 $flood-layout-width: 1000px !default
 // отступы внутри блочных элементов
@@ -116,6 +116,9 @@ $sidebar-width: 260px !default
 
 // aside
 $aside-width: 160px !default
+
+// header
+$logo-size: 142px 166px // h w
 
 // footer
 $footer-grid-space: 30px 0 !default // v h
@@ -161,8 +164,12 @@ $animation-speed: 0.2s !default
 $animation-speed-mouseleave: 0.35s !default
 
 // =========fonts style=========
-$font-norm: 'Roboto', sans-serif !default
-$font-alt: 'Roboto Slab', serif !default
+$font-norm: 'AkzidenzGroteskPro Cond', sans-serif !default
+//$font-norm: 'AkzidenzGroteskPro Cond Bold', sans-serif !default
+//$font-norm: 'AkzidenzGroteskPro Cond Bold Italic', sans-serif !default
+//$font-norm: 'AkzidenzGroteskPro Cond Italic', sans-serif !default
+$font-light: 'AkzidenzGroteskPro Light Cond', sans-serif !default
+$font-medium: 'AkzidenzGroteskPro Medium Cond', sans-serif !default
 
 // ============= обнуление жирности и наклонности шрифта ==============
 // ============= использовать, если подключается font-face ==============
@@ -173,47 +180,49 @@ $font-alt: 'Roboto Slab', serif !default
 
 // ============= основоной шрифт ==============
 =font-normal()
-	font:
-		family: $font-norm
-		weight: 300
+	font-family: $font-norm
+	+font-reset
 
 =font-bold()
-	font:
-		family: $font-norm
-		weight: 700
+	font-family: $font-norm
+	+font-reset
 
 =font-italic()
-	font:
-		family: $font-norm
-		weight: 300
-		style: italic
+	font-family: $font-norm
+	+font-reset
 
 =font-bold-italic()
-	font:
-		family: $font-norm
-		weight: 700
-		style: italic
+	font-family: $font-norm
+	+font-reset
+
+=font-light()
+	font-family: $font-light
+	+font-reset
+
+=font-medium()
+	font-family: $font-medium
+	+font-reset
 
 // ========== дополнительный шрифт ============
-=font-alt()
+//=font-alt()
 	font:
 		family: $font-alt
 		style: normal
 		weight: normal
 
-=font-alt-bold()
+//=font-alt-bold()
 	font:
 		family: $font-alt
 		style: normal
 		weight: 700
 
-=font-alt-italic()
+//=font-alt-italic()
 	font:
 		family: $font-alt
 		style: italic
 		weight: normal
 
-=font-alt-bold-italic()
+//=font-alt-bold-italic()
 	font:
 		family: $font-alt
 		style: italic
