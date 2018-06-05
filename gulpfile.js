@@ -80,8 +80,8 @@ gulp.task('sassCompilation', ['normalize'], function () { // Создаем та
 
 gulp.task('mergeCssLibs', function () { // Таск для мержа css библиотек
 	return gulp.src([
-		'src/css/temp/*.css' // see gulpfile-special.js
-		, 'src/libs/select2/dist/css/select2.min.css'
+		// 'src/css/temp/*.css' // see gulpfile-special.js
+		// , 'src/libs/select2/dist/css/select2.min.css'
 		// , 'src/lib/plugin/file.css'
 	]) // Выбираем файлы для конкатенации
 		.pipe(concatCss("src/css/libs.css", {
@@ -102,14 +102,15 @@ gulp.task('createCustomModernizr', function (done) { // Таск для форм
 gulp.task('copyLibsScriptsToJs', ['copyJqueryToJs'], function () { // Таск для мераж js библиотек
 	return gulp.src([
 		'src/libs/device.js/lib/device.min.js' // определение устройств
-		, 'src/libs/jquery-form/dist/jquery.form.min.js' // jquery form для валидации форм
+		// , 'src/libs/jquery-form/dist/jquery.form.min.js' // jquery form для валидации форм
 		, 'src/libs/jquery-smartresize/jquery.debouncedresize.js' // "умный" ресайз
 		, 'src/libs/jquery-placeholder/jquery.placeholder.min.js' // поддержка плейсхолдера в старых браузерах
-		, 'src/libs/select2/dist/js/select2.full.min.js' // кастомный селект
-		, 'src/libs/select2/dist/js/i18n/ru.js' // локализация для кастомного селекта
-		, 'src/js/temp/filer.min.js' // инпут файл
-		, 'src/libs/slick-carousel/slick/slick.min.js' // slick slider
+		// , 'src/libs/select2/dist/js/select2.full.min.js' // кастомный селект
+		// , 'src/libs/select2/dist/js/i18n/ru.js' // локализация для кастомного селекта
+		// , 'src/js/temp/filer.min.js' // инпут файл
+		// , 'src/libs/slick-carousel/slick/slick.min.js' // slick slider
 		, 'node_modules/object-fit-images/dist/ofi.min.js' // object-fit fix for a non-support browsers
+		, 'src/libs/stickybits/dist/stickybits.min.js' // sticky element on scroll
 	])
 		.pipe(concat('libs.js')) // Собираем их в кучу в новом файле libs.min.js
 		.pipe(gulp.dest('src/js'))
