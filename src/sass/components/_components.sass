@@ -4,6 +4,8 @@
 
 /* products
 .products
+	display: flex
+	justify-content: center
 	position: relative
 	margin-bottom: 5rem
 
@@ -28,10 +30,7 @@
 	min-width: 320px
 	max-width: calc(100% / 5)
 	flex: 1 1 320px
-	margin-top: 3rem
-
-	//background-color: rgba(blue, 0.2)
-	//outline: 1px solid red
+	margin-top: 4rem
 
 	+media('<1920px')
 		max-width: calc(100% / 4)
@@ -42,10 +41,21 @@
 	+media('<1280px')
 		max-width: calc(100% / 2)
 
+	+media('<992px')
+		max-width: calc(100% / 3)
+		width: 280px
+		min-width: 280px
+
+	+media('<900px')
+		max-width: calc(100% / 2)
+
+	+media('<mob-lg')
+		max-width: calc(100% / 3)
+		width: auto
+		min-width: 0
+
 	+media('<mob-md')
-		width: 100%
-		max-width: calc(100% / 1)
-		flex-basis: 100%
+		max-width: calc(100% / 2)
 
 .products__item__inner
 	display: block
@@ -66,6 +76,41 @@
 	margin: 0 auto 2rem
 	z-index: 1
 
+	+media('<tab-lg')
+		width: 156px
+
+	+media('<mob-lg')
+		width: 80px
+		box-shadow: 0 10px 25px rgba(black, 0.25)
+
+.products__item__awards
+	position: absolute
+	right: 0
+	top: 20px
+	width: 50px
+	margin: 0 -25px
+
+	+media('<tab-lg')
+		width: 38px
+		margin: 0 -19px
+
+	+media('<mob-lg')
+		width: 30px
+		margin: 0 -15px
+
+	img
+		width: 100%
+		margin-top: -25px
+
+		+media('<tab-lg')
+			margin-top: -19px
+
+		+media('<mob-lg')
+			margin-top: -15px
+
+		&:first-child
+			margin-top: 0
+
 .products__item__title
 	+font(2.4rem, round-float(30/24, 2))
 	text-align: center
@@ -79,6 +124,9 @@
 	transition:
 		property: $prop
 		duration: 0.33s
+
+	+media('<mob-lg')
+		+font(1.8rem, round-float(20/18, 2))
 
 .products__item__info
 	position: absolute
@@ -152,12 +200,177 @@
 
 // hover
 .no-touchevents .products__item__inner:hover
-	.products__item__title
-		opacity: 0
-		transform: translateY(40px)
+	+media('>=tab-lg')
+		.products__item__title
+			opacity: 0
+			transform: translateY(40px)
 
-	.products__item__info
-		opacity: 1
-		transform: translateY(0)
+		.products__item__info
+			opacity: 1
+			transform: translateY(0)
 
 /* products end
+
+/* product
+.prod
+	width: 100%
+	height: 100%
+	position: relative
+
+.prod-descr
+	width: 50%
+	height: 100%
+	display: inline-block
+	+font-medium
+
+.prod-image
+	width: 50%
+	position: sticky
+	top: $header-height
+	float: right
+
+.prod-wrap, .image-wrap
+	padding: 75px 80px
+
+	+media('<tab-lg')
+		padding: 50px 0 40px
+
+.prod-wrap
+	padding-left: 0
+
+.image-wrap
+	padding-right: 0
+	padding-left: 0
+	min-height: calc(100vh - #{$header-height})
+	
+	figure
+		margin: 0
+		padding: 0
+		box-shadow: 0 25px 50px rgba(black, 0.5)
+		position: absolute
+		z-index: 2
+		top: 50%
+		left: 50%
+		transform: translate(-50%, -50%)
+		width: 290px
+
+		+media('<desk-md')
+			width: 220px
+
+		img
+			width: 100%
+
+.prod-descr h2
+	margin-bottom: 4rem
+	font-size: 6.0rem
+	line-height: round-float(72/60, 2)
+
+	+media('<desk-md')
+		font-size: 4.2rem
+
+	+media('<tab-lg')
+		margin-bottom: 3rem
+		font-size: 3.6rem
+
+.prod-descr p
+	+font-light
+	font-size: 2.4rem
+	line-height: round-float(30/24, 2)
+
+	+media('<tab-lg')
+		font-size: 2rem
+
+.prod-circle
+	height: 500px
+	width: 500px
+	border-radius: 500px
+	position: absolute
+	top: 50%
+	left: 50%
+	transform: translate(-50%, -50%)
+
+	+media('<desk-md')
+		width: 380px
+		height: 380px
+
+.prod-icons
+	padding-bottom: 40px
+
+.prod-icons img
+	display: inline-block
+	width: 50px
+	height: 50px
+
+.prod-descr h3
+	font-size: 3.6rem
+	line-height: round-float(40/36, 2)
+
+	+media('<tab-lg')
+		font-size: 2.4rem
+
+.prod-descr table
+	width: 100%
+	margin-bottom: 3rem
+	font-size: 2.4rem
+	line-height: round-float(30/24, 2)
+	+font-light
+
+	+media('<tab-lg')
+		font-size: 2rem
+
+	&:last-child
+		margin-bottom: 0
+
+.prod-descr table td
+	padding-bottom: 20px
+
+.prod-descr table td:first-child
+	text-align: left
+
+.prod-descr table td:last-child
+	text-align: right
+	padding-left: 10px
+	min-width: 80px
+	+font-medium
+
+.prod-descr-circle
+	height: 220px
+	width: 220px
+	border-radius: 200px
+	position: absolute
+	top: 50%
+	left: 50%
+	transform: translate(-50%, -50%)
+
+.prod-descr-circle.green,
+.prod-circle.green
+	background: #335346
+
+.prod-descr-circle.blue,
+.prod-circle.blue
+	background: #39485d
+
+.prod-descr-circle.red,
+.prod-circle.red
+	background: #654349
+
+.prod-descr-image
+	display: none
+	position: relative
+	margin-bottom: 3rem
+
+	figure
+		position: relative
+		padding: 0
+		margin: 0 auto
+		width: 160px
+
++media('<tab-lg')
+	.prod-descr-image
+		display: block
+	.prod-image
+		display: none
+	.prod-descr
+		width: 100%
+
+/* product end

@@ -6,7 +6,7 @@ html
 	font-size: 62.5%
 
 	// блокировка скролла
-	//&.css-scroll-fixed
+	&.css-scroll-fixed
 		+scroll-blocked()
 
 body
@@ -35,7 +35,13 @@ body
 	+push-auto
 
 	+media('<desk-sm')
+		+padding-horizontal(nth($page-layout-space--md, 2))
+
+	+media('<tab-lg')
 		+padding-horizontal(nth($page-layout-space--sm, 2))
+
+	+media('<mob-lg')
+		+padding-horizontal(nth($page-layout-space--mob, 2))
 
 // выравнивание текстовых элементов на странице статьи (контент обернут в .layout-article)
 // и их максимальная ширина
@@ -155,7 +161,21 @@ body
 	background: url(../../img/bg-img.png) center
 
 	+media('<tab-lg')
-		padding-top: 40px
+		padding-top: 0
+
+	.sep-page &
+		&::before
+			content: ""
+			display: none
+			width: 50%
+			height: 100%
+			position: absolute
+			left: 0
+			top: 0
+			background-color: $bg-color
+
+			+media('>=tab-lg')
+				display: block
 
 /* === LAYOUT end ===
 
@@ -165,7 +185,14 @@ body
 	position: relative
 	clear: both
 	z-index: 4
+
 	+padding-vertical(75px, 50px)
+
+	+media('<tab-lg')
+		+padding-vertical(50px, 40px)
+
+	.sep-page &
+		padding: 0
 
 //.main__holder
 //	width: 100%
@@ -195,8 +222,12 @@ body
 	top: 0
 	z-index: 15
 
-	+media('<mob-lg')
-		margin-top: 70px
+	.shutter-after-open &
+		background-color: $base-color-alt
+
+	.layout
+		+media('<tab-lg')
+			padding: 0
 
 .header__holder
 	display: flex
@@ -208,11 +239,8 @@ body
 	z-index: 5
 	+clear
 
-	//+media('<desk-sm')
-		padding-right: 0
-
-	+media('<mob-lg')
-		padding: 74px 0 0
+	+media('<tab-lg')
+		padding: 0 $header-height
 
 	&::before, &::after
 		content: ""
@@ -231,6 +259,11 @@ body
 	overflow: hidden
 	z-index: 5
 
+	+media('<tab-lg')
+		width: nth($logo-short-size, 2)
+		margin: -#{round(nth($logo-short-size, 1)/2)} 0 0 -#{round(nth($logo-short-size, 2)/2)}
+		left: 50%
+
 	&::before, &::after
 		content: ""
 		display: block
@@ -244,6 +277,10 @@ body
 		+ratio(nth($logo-size, 2), nth($logo-size, 1))
 		background: url(../../img/logo.png) no-repeat
 
+		+media('<tab-lg')
+			+ratio(nth($logo-short-size, 2), nth($logo-short-size, 1))
+			background: none
+
 		.header-is-top &
 			opacity: 0
 
@@ -256,13 +293,12 @@ body
 		background: url(../../img/logo-short.png) no-repeat
 		margin: -#{round(nth($logo-short-size, 1)/2-1)} 0 0 -#{round(nth($logo-short-size, 2)/2-1)}
 
+		+media('<tab-lg')
+			opacity: 1
+			margin: -#{round(nth($logo-short-size, 1)/2)} 0 0 -#{round(nth($logo-short-size, 2)/2)}
+
 		.header-is-top &
 			opacity: 1
-
-	+media('<mob-lg')
-		left: 50%
-		top: 0
-		margin-left: -#{round(nth($logo-size, 2)/2)}
 
 	a, & > span
 		position: absolute
@@ -282,19 +318,63 @@ body
 /* === HEADER end ===
 
 /* === NAVIGATION ===
+.nav-wrap, .nav-footer
+	&::before
+		position: absolute
+		content: ""
+		display: none
+		top: 0
+		left: 20px
+		right: 20px
+		border: solid #cfb9aa
+		border-width: 0
+
+		+media('<tab-lg')
+			display: block
+
+.nav-wrap
+	+media('<tab-lg')
+		display: none
+		flex-direction: column
+		position: fixed
+		left: 0
+		bottom: 0
+		width: 100%
+		height: calc(100% - #{$header-height})
+		background-color: $base-color-alt
+
+	&.active
+		+media('<tab-lg')
+			display: flex
+
+	&::before
+		border-bottom-width: 1px
+
 .nav
 	position: relative
+	width: 100%
+
+	+media('<tab-lg')
+		display: flex
+		flex: 1 1
+		justify-content: center
+		align-items: center
 
 .nav__list
 	+clear
 
-	+media('<mob-lg')
-		display: flex
-		flex-wrap: wrap
-		justify-content: center
+	+media('<tab-lg')
+		width: 100%
+		max-height: 100%
+		overflow-x: hidden
+		overflow-y: auto
 
 	li
 		float: left
+
+		+media('<tab-lg')
+			float: none
+			display: block
 
 	a
 		padding: 0 25px
@@ -309,22 +389,51 @@ body
 		+media('<desk-lg')
 			+padding-horizontal(15px)
 
+		+media('<desk-md')
+			font-size: 2rem
+
 		+media('<desk-sm')
 			+padding-horizontal(8px)
 
-		+media('<desk-md')
-			font-size: 2rem
+		+media('<tab-lg')
+			color: $text-color
+			+font-medium
+			+font(3.6rem, round-float(48/36, 2))
+			padding: 9px 20px
+			text-align: center
+			justify-content: center
+			height: auto
 
 	// hover
 	.no-touchevents &
 		a:hover
 			box-shadow: inset 0 -2px 0 $base-color
+
+			+media('<tab-lg')
+				box-shadow: none
 		
 	// current
 	li.current
 		a
 			color: white
 			background-color: #c4161c
+
+			+media('<tab-lg')
+				background-color: transparent
+				color: $base-color
+
+
+.nav-footer
+	position: relative
+	display: none
+
+	+media('<tab-lg')
+		display: flex
+		width: 100%
+		min-height: $header-height
+
+	&::before
+		border-top-width: 1px
 
 /* === NAVIGATION end ===
 
@@ -518,7 +627,10 @@ body
 		duration: $animation-speed
 
 	+media('<desk-sm')
-		width: nth($page-layout-space--sm, 2)
+		width: nth($page-layout-space--md, 2)
+
+	+media('<tab-lg')
+		display: none
 
 	span
 		display: block

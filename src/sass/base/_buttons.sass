@@ -53,32 +53,27 @@
 /* button toggle menu
 .btn-menu
 	$btn-menu-bg: transparent
-	$btn-menu-color: white
-	$btn-menu-lines-width: 26px
-	$btn-menu-lines-width--lg: 22px
+	$btn-menu-color: $base-color-alt
+	$btn-menu-lines-width: 24px
 	$btn-menu-lines-height: 3px
-	$btn-menu-lines-height--lg: 2px
 	$btn-menu-lines-space: 5px
-	$btn-menu-lines-space--lg: 4px
-	$btn-menu-lines-color: white
+	$btn-menu-lines-color: currentColor
 	$btn-menu-animation-speed: $animation-speed
 	$btn-menu-animation-delay: round-float($animation-speed*0.5, 2)
 
 	$user-options-cross-width: $btn-menu-lines-width
-	$user-options-cross-width--lg: $btn-menu-lines-width--lg
 	$user-options-cross-height: $btn-menu-lines-height
-	$user-options-cross-height--lg: $btn-menu-lines-height--lg
-	$user-options-cross-color: $btn-menu-lines-color
+	$user-options-cross-color: $text-color
 
 	// =====================
 
 	display: none
-	+size(50px)
+	+size(60px)
 	position: fixed
-	right: 0
+	left: 0
 	top: 0
 	text-decoration: none
-	color: $text-color
+	color: $btn-menu-color
 	background-color: $btn-menu-bg
 	user-select: none
 	-webkit-tap-highlight-color: transparent
@@ -87,7 +82,7 @@
 		property: background-color
 		duration: $animation-speed
 
-	//+media('<tab-lg')
+	+media('<tab-lg')
 		display: block
 
 	.touchevents &
@@ -114,10 +109,6 @@
 			delay: 0s
 			timing-function: cubic-bezier(0.65, 0.05, 0.36, 1)
 
-		+media('<desk-lg')
-			+size($user-options-cross-width--lg, $user-options-cross-height--lg)
-			+margin($top: -#{round($user-options-cross-height--lg*0.5)}, $left: -#{round($user-options-cross-width--lg*0.5)})
-
 	// бутерброд
 	& > i
 		position: absolute
@@ -126,21 +117,18 @@
 		+size($btn-menu-lines-width, $btn-menu-lines-height)
 		background-color: $btn-menu-lines-color
 		+margin($top: -#{round($btn-menu-lines-height*0.5)}, $left: -#{round($btn-menu-lines-width*0.5)})
+		border-radius: $btn-menu-lines-height
 		backface-visibility: hidden
 		transition:
 			property: opacity
 			duration: $btn-menu-animation-speed
 			delay: $btn-menu-animation-delay
 
-
-		+media('<desk-lg')
-			+size($btn-menu-lines-width--lg, $btn-menu-lines-height--lg)
-			+margin($top: -#{round($btn-menu-lines-height--lg*0.5)}, $left: -#{round($btn-menu-lines-width--lg*0.5)})
-
 		&::before, &::after
 			+pseudo()
 			left: 0
 			+size($btn-menu-lines-width, $btn-menu-lines-height)
+			border-radius: $btn-menu-lines-height
 			background-color: $btn-menu-lines-color
 			backface-visibility: hidden
 			transition:
@@ -148,27 +136,16 @@
 				duration: $btn-menu-animation-speed
 				delay: $btn-menu-animation-delay
 
-
-			+media('<desk-lg')
-				+size($btn-menu-lines-width--lg, $btn-menu-lines-height--lg)
-
 		//first line menu
 		&::before
 			top: -#{$btn-menu-lines-height + $btn-menu-lines-space}
-
-			+media('<desk-lg')
-				top: -#{$btn-menu-lines-height--lg + $btn-menu-lines-space--lg}
 
 		//third line menu
 		&::after
 			top: #{$btn-menu-lines-height + $btn-menu-lines-space}
 
-			+media('<desk-lg')
-				top: #{$btn-menu-lines-height--lg + $btn-menu-lines-space--lg}
-
 	// hover
 	.no-touchevents &:hover
-		background-color: #f3f3f3
 
 		&::before, &::after
 			background-color: $base-color
@@ -181,11 +158,8 @@
 
 	// active
 	&.active
-		background-color: #fff
-
 		&::before, &::after
 			transition-delay: $btn-menu-animation-delay
-			background-color: $base-color
 
 			opacity: 1
 
@@ -205,13 +179,7 @@
 			&::before
 				transform: translate(0, #{$btn-menu-lines-height + $btn-menu-lines-space}) translateZ(0)
 
-				+media('<desk-lg')
-					transform: translate(0, #{$btn-menu-lines-height--lg + $btn-menu-lines-space--lg}) translateZ(0)
-
 			&::after
 				transform: translate(0, -#{$btn-menu-lines-height + $btn-menu-lines-space}) translateZ(0)
-
-				+media('<desk-lg')
-					transform: translate(0, -#{$btn-menu-lines-height--lg + $btn-menu-lines-space--lg}) translateZ(0)
 
 /* button toggle menu end

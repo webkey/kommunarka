@@ -18,19 +18,13 @@ $line-height--less: round-float(2.0rem/$font-size--less, 2) !default
 // =======h1========
 $font-size-h1: 7.2rem !default
 $line-height-h1: round-float(10rem/$font-size-h1, 2) !default
-// md ===
-$font-size-h1--md: 6rem !default
-$line-height-h1--md: round-float(4.8rem/$font-size-h1--md, 2) !default
 // sm ===
-$font-size-h1--sm: 5rem !default
+$font-size-h1--sm: 3.6rem !default
 $line-height-h1--sm: round-float(4.2rem/$font-size-h1--sm, 2) !default
 
 // =======h2========
 $font-size-h2: round-float($font-size-h1*3.6rem/4.8rem, 1) !default
 $line-height-h2: round-float(4.8rem/3.6rem, 2) !default
-// md ===
-$font-size-h2--md: round-float($font-size-h1--md*0.84, 1) !default
-$line-height-h2--md: round-float(($line-height-h1--md*1.02),2) !default
 // sm ===
 $font-size-h2--sm: round-float($font-size-h1--sm*0.87, 1) !default
 $line-height-h2--sm: round-float(($line-height-h1--sm*1.01),2) !default
@@ -63,7 +57,7 @@ $bottom-space--sm: round-float($font-size*$line-height*0.75, 1) !default
 // =======Цветовая схема========
 // цвет бренда
 $base-color: #c4161c !default
-$base-color-alt: #a78a45 !default
+$base-color-alt: #e7dad2 !default
 // главные контрастные цвета (обычно, белый и черный)
 $text-color-base: black !default
 $bg-color-base: white !default
@@ -93,7 +87,9 @@ $user-content: user-content !default
 // =======Layout========
 // отступы для всего сайта
 $page-layout-space: 0 150px !default // v h
-$page-layout-space--sm: 0 100px !default // v h
+$page-layout-space--md: 0 100px !default // v h
+$page-layout-space--sm: 0 30px !default // v h
+$page-layout-space--mob: 0 20px !default // v h
 // максимальная ширина сайта
 $page-layout-width: 1920px !default
 // минимальные отступы у текствого блока
