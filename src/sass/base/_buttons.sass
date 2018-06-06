@@ -114,7 +114,7 @@
 		position: absolute
 		left: 50%
 		top: 50%
-		+size($btn-menu-lines-width, $btn-menu-lines-height)
+		+size(13px, $btn-menu-lines-height)
 		background-color: $btn-menu-lines-color
 		+margin($top: -#{round($btn-menu-lines-height*0.5)}, $left: -#{round($btn-menu-lines-width*0.5)})
 		border-radius: $btn-menu-lines-height
@@ -142,19 +142,13 @@
 
 		//third line menu
 		&::after
+			transform: scale(round-float(18/24, 2), 1)
+			transform-origin: left center
 			top: #{$btn-menu-lines-height + $btn-menu-lines-space}
 
 	// hover
 	.no-touchevents &:hover
-
-		&::before, &::after
-			background-color: $base-color
-
-		& > i
-			background-color: $base-color
-
-			&::before, &::after
-				background-color: $base-color
+		box-shadow: inset 0 -2px 0 $base-color
 
 	// active
 	&.active
@@ -181,5 +175,11 @@
 
 			&::after
 				transform: translate(0, -#{$btn-menu-lines-height + $btn-menu-lines-space}) translateZ(0)
+
+		.no-touchevents &:hover
+			box-shadow: none
+
+			&::before, &::after
+				background-color: $base-color
 
 /* button toggle menu end

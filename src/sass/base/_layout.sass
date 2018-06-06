@@ -6,8 +6,12 @@ html
 	font-size: 62.5%
 
 	// блокировка скролла
-	&.css-scroll-fixed
+	&.css-scroll-fixed:not(.css-scroll-fixed)
 		+scroll-blocked()
+
+	&.shutter-only-mob.css-scroll-fixed
+		+media('<tab-lg')
+			+scroll-blocked()
 
 body
 	position: relative
@@ -181,7 +185,8 @@ body
 
 /* === CONTENT ===
 .main
-	flex: 1 1
+	flex-shrink: 1
+	flex-grow: 1
 	position: relative
 	clear: both
 	z-index: 4
@@ -216,37 +221,37 @@ body
 
 /* === HEADER ===
 .header
+	width: 100% // нужно для браузеров не поддерживающих position: sticky
+	min-width: 320px // нужно для браузеров не поддерживающих position: sticky
 	margin: 0
 	background-color: #403b38
 	position: sticky
 	top: 0
 	z-index: 15
+	transition:
+		property: background-color
+		duration: $animation-speed
 
 	.shutter-after-open &
-		background-color: $base-color-alt
+		+media('<tab-lg')
+			background-color: $base-color-alt
 
 	.layout
 		+media('<tab-lg')
 			padding: 0
 
 .header__holder
-	display: flex
-	justify-content: space-between
-	align-items: center
 	position: relative
+	//display: flex
+	//justify-content: space-between
+	//align-items: center
+	text-align: center
 	height: $header-height
-	padding: 0 nth($logo-size, 2)
+	padding: 0 nth($logo-size, 2) + 10
 	z-index: 5
-	+clear
 
 	+media('<tab-lg')
 		padding: 0 $header-height
-
-	&::before, &::after
-		content: ""
-		height: 100%
-		width: 0
-		display: block
 
 /* logo
 .logo
@@ -256,6 +261,7 @@ body
 	width: nth($logo-size, 2)
 	margin: -#{round(nth($logo-size, 1)/2)} 0 0
 	text-indent: -9999px
+	text-align: left
 	overflow: hidden
 	z-index: 5
 
@@ -333,8 +339,11 @@ body
 			display: block
 
 .nav-wrap
+	display: inline-block // для ие
+	vertical-align: top // для ие
+
 	+media('<tab-lg')
-		display: none
+		display: flex
 		flex-direction: column
 		position: fixed
 		left: 0
@@ -342,10 +351,17 @@ body
 		width: 100%
 		height: calc(100% - #{$header-height})
 		background-color: $base-color-alt
+		opacity: 0
+		visibility: hidden
+		transition:
+			property: opacity, visibility
+			duration: $animation-speed
 
 	&.active
 		+media('<tab-lg')
-			display: flex
+		+media('<tab-lg')
+			opacity: 1
+			visibility: visible
 
 	&::before
 		border-bottom-width: 1px
@@ -377,7 +393,7 @@ body
 			display: block
 
 	a
-		padding: 0 25px
+		padding: 10px 25px
 		display: block
 		display: flex
 		align-items: center
@@ -394,6 +410,7 @@ body
 
 		+media('<desk-sm')
 			+padding-horizontal(8px)
+			font-size: 1.8rem
 
 		+media('<tab-lg')
 			color: $text-color
@@ -411,7 +428,7 @@ body
 
 			+media('<tab-lg')
 				box-shadow: none
-		
+
 	// current
 	li.current
 		a
@@ -469,7 +486,7 @@ body
 	//margin: 0 auto
 	position: relative
 	clear: both
-	z-index: 5
+	z-index: 3
 
 .footer__holder
 	overflow: hidden
@@ -498,9 +515,7 @@ body
 	// для браузеров не поддерживающих display: flex
 	display: inline-block
 	vertical-align: top
-	width: calc(33.33% - 5px)
-	// для браузеров поддерживающих display: flex
-	flex: 1 1 33.33%
+	width: calc(33.33%)
 
 	+media('<mob-lg')
 		min-width: 100%
@@ -593,7 +608,7 @@ body
 	background-color: black
 	visibility: hidden
 	opacity: 0
-	z-index: 95
+	z-index: 10
 	transition:
 		property: opacity, visibility
 		duration: $animation-speed
@@ -602,6 +617,10 @@ body
 	&.active
 		visibility: visible
 		opacity: 0.35
+
+		.shutter-only-mob &
+			+media('>=tab-lg')
+				display: none // скрывать на десктопе, если shutter-only-mob
 
 /* shutter overlay end
 

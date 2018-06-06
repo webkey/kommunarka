@@ -4,66 +4,71 @@
 
 /* products
 .products
-	display: flex
-	justify-content: center
+	// хорошо получается с flex, но не работает в ie10
+	//display: flex
+	//justify-content: center
 	position: relative
 	margin-bottom: 5rem
+	text-align: center
 
 	&:last-child
 		margin-bottom: 0
 
 .products__list
 	position: relative
-	display: flex
-	flex-wrap: wrap
-	//justify-content: center
-	justify-content: flex-start
+	display: inline-block
+	vertical-align: top
 	margin-top: -3rem
+	text-align: left
+	+clear-spacing
 
 	+media('<tab-sm')
 		justify-content: flex-start
 
 .products__item
+	position: relative
 	display: inline-block
 	vertical-align: top
-	width: 320px
 	min-width: 320px
-	max-width: calc(100% / 5)
-	flex: 1 1 320px
+	width: calc(100% / 5)
 	margin-top: 4rem
+	color: inherit
+	text-decoration: inherit
+	letter-spacing: normal
+	font-size: 1.6rem
 
 	+media('<1920px')
-		max-width: calc(100% / 4)
+		width: calc(100% / 4)
 
 	+media('<1600px')
-		max-width: calc(100% / 3)
+		width: calc(100% / 3)
 
 	+media('<1280px')
-		max-width: calc(100% / 2)
+		width: calc(100% / 2)
 
 	+media('<992px')
-		max-width: calc(100% / 3)
-		width: 280px
-		min-width: 280px
-
-	+media('<900px')
-		max-width: calc(100% / 2)
-
-	+media('<mob-lg')
-		max-width: calc(100% / 3)
-		width: auto
+		width: calc(100% / 3)
 		min-width: 0
 
+	+media('<900px')
+		width: calc(100% / 2)
+
+	+media('<mob-lg')
+		width: calc(100% / 3)
+
 	+media('<mob-md')
-		max-width: calc(100% / 2)
+		width: calc(100% / 2)
 
 .products__item__inner
 	display: block
 	position: relative
 	color: inherit
-	text-decoration: none
+	text-decoration: inherit
 	min-height: 590px
 	z-index: 1
+
+	.no-touchevents
+		min-height: 0
 
 	+media('<tab-lg')
 		min-height: 0
@@ -131,7 +136,7 @@
 .products__item__info
 	position: absolute
 	left: 0
-	bottom: 0
+	top: 200px
 	width: 100%
 	background-color: $base-color
 	padding: 240px 15px 40px
@@ -146,19 +151,24 @@
 		property: $prop
 		duration: 0.33s
 
-	+media('<tab-lg')
+	.touchevents &
 		display: none
 
-	ul
-		&, .user-content &
-			margin: 0 auto
-			padding: 0
+	+media('<tab-lg')
+		top: 160px
+		padding-top: 195px
 
-		&
-			max-width: 220px
+	+media('<mob-lg')
+		top: 80px
+		padding: 105px 10px 15px
+		font-size: 1.6rem
 
-	li
-		&, .user-content &
+.info-list
+	&, .user-content &
+		margin: 0 auto
+		padding: 0
+
+		li
 			padding-left: 0
 			margin-bottom: 10px
 
@@ -168,18 +178,21 @@
 			&::before
 				content: none
 
-		&
-			position: relative
-			overflow: hidden
+	&
+		max-width: 220px
 
-			&::after
-				content: ""
-				display: block
-				position: absolute
-				left: 5px
-				right: 5px
-				bottom: 5px
-				border-top: 1px dotted white
+	li
+		position: relative
+		overflow: hidden
+
+		&::after
+			content: ""
+			display: block
+			position: absolute
+			left: 5px
+			right: 5px
+			bottom: 5px
+			border-top: 1px dotted white
 
 		& > div
 			max-width: 50%
@@ -199,15 +212,16 @@
 				float: right
 
 // hover
-.no-touchevents .products__item__inner:hover
-	+media('>=tab-lg')
-		.products__item__title
-			opacity: 0
-			transform: translateY(40px)
+.no-touchevents .products__item:hover
+	z-index: 2
 
-		.products__item__info
-			opacity: 1
-			transform: translateY(0)
+	.products__item__title
+		opacity: 0
+		transform: translateY(40px)
+
+	.products__item__info
+		opacity: 1
+		transform: translateY(0)
 
 /* products end
 
@@ -225,9 +239,13 @@
 
 .prod-image
 	width: 50%
+	position: relative
 	position: sticky
 	top: $header-height
 	float: right
+
+	.no-csspositionsticky &
+		top: auto
 
 .prod-wrap, .image-wrap
 	padding: 75px 80px

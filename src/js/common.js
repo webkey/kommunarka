@@ -1,5 +1,7 @@
 'use strict';
 
+var $WINDOW = $(window), $DOC = $(document), $BODY = $('body');
+
 /**
  * !resize only width
  * */
@@ -55,6 +57,41 @@ function printShow() {
 }
 
 /**
+ * !Get size of scroll
+ * */
+
+function getScrollSize() {
+	// создадим элемент с прокруткой
+	var div = document.createElement('div');
+
+	div.style.overflow = 'scroll';
+	div.style.width = '50px';
+	div.style.height = '50px';
+	div.style.position = 'fixed';
+	div.style.left = '0px';
+	div.style.bottom = '0px';
+	div.style.visibility = 'hidden';
+
+	// добавить элемент на страницу
+	document.body.appendChild(div);
+
+	// удалить элемент со страницы
+	document.body.removeChild(div);
+
+	// определить размеры скролла
+	var scrollWidth = window.innerWidth - document.body.offsetWidth;
+	var scrollHeight = window.innerHeight - document.body.offsetHeight;
+
+	return {
+		'width' : scrollWidth,
+		'height' : scrollHeight
+	};
+
+	/** getScrollSize().width - получить ширину скролла */
+	/** getScrollSize().height - получить высоту скролла */
+}
+
+/**
  * !Add class on scroll page
  * */
 $(function () {
@@ -100,6 +137,7 @@ function stickyInit() {
 function toggleShutters() {
 	var $overlay = $('.shutter-overlay-js'),
 		$html = $('html'),
+		$elemens = $('.header, .main, .footer'),
 		activeClass = 'active';
 
 	var $nav = $('.shutter--nav-js');
@@ -112,19 +150,33 @@ function toggleShutters() {
 
 		$nav.toggleClass(activeClass);
 
+		if ($curOpener.hasClass(activeClass)) {
+			$elemens.css({
+				'padding-right': getScrollSize().width,
+				'padding-bottom': getScrollSize().height
+			});
+		} else {
+			$elemens.css({
+				'padding-right': '',
+				'padding-bottom': ''
+			});
+		}
+
 		$overlay.toggleClass(activeClass, $curOpener.hasClass(activeClass));
-		$html.toggleClass('shutter-after-open css-scroll-fixed', $curOpener.hasClass(activeClass)).addClass('header-show').removeClass('header-hide');
+		$html.toggleClass('shutter-after-open css-scroll-fixed shutter-only-mob', $curOpener.hasClass(activeClass));
 
 		e.preventDefault();
 	});
 
 	// close
-	$('.js-btn-shutter-close, .shutter-overlay-js, .btn-filters-apply').on('click', function (e) {
+	$('.shutter-overlay-js').on('click', function (e) {
 		$btnNav.removeClass(activeClass);
 
 		$nav.removeClass(activeClass);
 
 		$overlay.removeClass(activeClass);
+
+		$html.removeClass('shutter-after-open css-scroll-fixed shutter-only-mob');
 
 		e.preventDefault();
 	})
