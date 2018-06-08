@@ -111,6 +111,7 @@ gulp.task('copyLibsScriptsToJs', ['copyJqueryToJs'], function () { // Таск �
 		// , 'src/libs/slick-carousel/slick/slick.min.js' // slick slider
 		, 'node_modules/object-fit-images/dist/ofi.min.js' // object-fit fix for a non-support browsers
 		, 'src/libs/stickybits/dist/stickybits.min.js' // sticky element on scroll
+		, 'node_modules/parallax-js/dist/parallax.min.js' // parallax
 	])
 		.pipe(concat('libs.js')) // Собираем их в кучу в новом файле libs.min.js
 		.pipe(gulp.dest('src/js'))
@@ -189,13 +190,13 @@ gulp.task('buildDist', ['cleanDist', 'htmlCompilation', 'copyImgToDist', 'sassCo
 		}))
 		.pipe(gulp.dest('dist/js'));
 
-	gulp.src(['!src/js/temp/**/*.js', '!src/js/**/temp-*.js', '!src/js/common.js', 'src/js/*.js']) // Переносим остальные скрипты в продакшен
+	gulp.src(['!src/js/temp/**/*.js', '!src/js/**_temp_*.js', '!src/js/common.js', 'src/js/*.js']) // Переносим остальные скрипты в продакшен
 		.pipe(gulp.dest('dist/js'));
 
 	gulp.src('src/assets/**/*') // Переносим дополнительные файлы в продакшен
 		.pipe(gulp.dest('dist/assets'));
 
-	gulp.src(['!src/__*.html', '!src/_tpl_*.html', 'src/*.html']) // Переносим HTML в продакшен
+	gulp.src(['!src/__*.html', '!src/_tpl_*.html', '!src/_temp_*.html', 'src/*.html']) // Переносим HTML в продакшен
 		.pipe(revts()) // Добавить версии подключаемых файлов. В html добавить ключ ?rev=@@hash в место добавления версии
 		.pipe(gulp.dest('dist'));
 

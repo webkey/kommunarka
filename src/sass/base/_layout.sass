@@ -168,6 +168,9 @@ body
 		padding-top: 0
 
 	.sep-page &
+		+media('>desk-hd')
+			background-attachment: fixed
+
 		&::before
 			content: ""
 			display: none
@@ -393,7 +396,7 @@ body
 			display: block
 
 	a
-		padding: 10px 25px
+		padding: 10px 30px
 		display: block
 		display: flex
 		align-items: center

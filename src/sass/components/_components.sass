@@ -192,7 +192,10 @@
 			left: 5px
 			right: 5px
 			bottom: 5px
-			border-top: 1px dotted white
+			//border-top: 1px dotted white
+			height: 1px
+			background: url(../../img/dot.png)
+			opacity: 0.6
 
 		& > div
 			max-width: 50%
@@ -238,17 +241,41 @@
 	+font-medium
 
 .prod-image
-	width: 50%
+	width: calc(50% + #{nth($page-layout-space, 2)})
+	margin-right: -#{nth($page-layout-space, 2)}
 	position: relative
 	position: sticky
 	top: $header-height
 	float: right
 
+	+media('<desk-md')
+		width: calc(50% + #{nth($page-layout-space--md, 2)})
+		margin-right: -#{nth($page-layout-space--md, 2)}
+
+	&::before
+		content: ""
+		display: block
+		position: absolute
+		width: 100%
+		height: 100%
+		left: 0
+		top: 0
+		background: url(../../img/bg-img.png) repeat 0 34px
+
 	.no-csspositionsticky &
 		top: auto
 
 .prod-wrap, .image-wrap
-	padding: 75px 80px
+	padding: 75px 160px
+
+	+media('<desk-hd')
+		+padding-horizontal(100px)
+
+	+media('<desk-lg')
+		+padding-horizontal(80px)
+
+	+media('<desk-sm')
+		+padding-horizontal(40px)
 
 	+media('<tab-lg')
 		padding: 50px 0 40px
@@ -278,26 +305,6 @@
 		img
 			width: 100%
 
-.prod-descr h2
-	margin-bottom: 4rem
-	font-size: 6.0rem
-	line-height: round-float(72/60, 2)
-
-	+media('<desk-md')
-		font-size: 4.2rem
-
-	+media('<tab-lg')
-		margin-bottom: 3rem
-		font-size: 3.6rem
-
-.prod-descr p
-	+font-light
-	font-size: 2.4rem
-	line-height: round-float(30/24, 2)
-
-	+media('<tab-lg')
-		font-size: 2rem
-
 .prod-circle
 	height: 500px
 	width: 500px
@@ -314,42 +321,101 @@
 .prod-icons
 	padding-bottom: 40px
 
-.prod-icons img
-	display: inline-block
-	width: 50px
-	height: 50px
+	img
+		display: inline-block
+		width: 50px
+		height: 50px
 
-.prod-descr h3
-	font-size: 3.6rem
-	line-height: round-float(40/36, 2)
+.prod-descr
+	h2
+		margin-bottom: 4rem
+		font-size: 6.0rem
+		line-height: round-float(72/60, 2)
 
-	+media('<tab-lg')
+		+media('<desk-md')
+			font-size: 4.2rem
+
+		+media('<tab-lg')
+			margin-bottom: 3rem
+			font-size: 3.6rem
+
+	p
+		+font-light
 		font-size: 2.4rem
+		line-height: round-float(30/24, 2)
 
-.prod-descr table
-	width: 100%
-	margin-bottom: 3rem
-	font-size: 2.4rem
-	line-height: round-float(30/24, 2)
-	+font-light
+		+media('<tab-lg')
+			font-size: 2rem
 
-	+media('<tab-lg')
-		font-size: 2rem
+	h3
+		font-size: 3.6rem
+		line-height: round-float(40/36, 2)
 
-	&:last-child
-		margin-bottom: 0
+		+media('<tab-lg')
+			font-size: 2.4rem
 
-.prod-descr table td
-	padding-bottom: 20px
+	table
+		//display: block
+		width: 100%
+		margin-bottom: 3rem
+		font-size: 2.4rem
+		line-height: round-float(30/24, 2)
+		+font-light
 
-.prod-descr table td:first-child
-	text-align: left
+		+media('<tab-lg')
+			font-size: 2rem
 
-.prod-descr table td:last-child
-	text-align: right
-	padding-left: 10px
-	min-width: 80px
-	+font-medium
+		&:last-child
+			margin-bottom: 0
+
+		//tbody
+			display: block
+
+		tr
+			//display: block
+			//position: relative
+			//overflow: hidden
+			//margin-bottom: 20px
+			//z-index: 1
+
+			&:last-child
+				margin-bottom: 0
+
+			//&::before
+				content: ""
+				display: block
+				position: absolute
+				left: 5px
+				right: 5px
+				bottom: 7px
+				height: 1px
+				background: url(../../img/dot.png)
+				z-index: -1
+				filter: invert(1)
+				opacity: 0.4
+
+		td
+			$th-right-width: 200px
+			//display: block
+			//padding-bottom: 20px
+			//background-color: $bg-color
+			padding-bottom: 20px
+			vertical-align: bottom
+
+			tr:last-child &
+				padding-bottom: 0
+
+			&:first-child
+				//float: left
+				padding-right: 13px
+				text-align: left
+				//max-width: calc(100% - #{$th-right-width})
+
+			&:last-child
+				//float: right
+				text-align: right
+				padding-left: 13px
+				min-width: $th-right-width
 
 .prod-descr-circle
 	height: 220px
@@ -384,11 +450,45 @@
 		width: 160px
 
 +media('<tab-lg')
+
 	.prod-descr-image
 		display: block
+
 	.prod-image
 		display: none
+
 	.prod-descr
 		width: 100%
 
 /* product end
+
+/* scene
+.scene
+	position: absolute
+	overflow: hidden
+	left: 0
+	top: 0
+	width: 100%
+	height: 100%
+	z-index: 9999
+	user-select: none
+	-webkit-tap-highlight-color: transparent
+	pointer-events: none
+
+	.touchevents &
+		display: none
+
+	+media('<tab-lg')
+		display: none
+
+	& > div
+		position: absolute
+		width: 100%
+		height: 100%
+		left: 0
+		top: 0
+
+		img
+			position: absolute
+
+/* scene end

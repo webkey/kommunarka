@@ -183,6 +183,17 @@ function toggleShutters() {
 }
 
 /**
+ * !parallax initial
+ * */
+function parallaxInit(){
+	var scene = $('.scene').get(0);
+	if ($(scene).length) {
+		var parallaxInstance = new Parallax(scene);
+	}
+}
+
+
+/**
  * !scroll to top
  * */
 $(function () {
@@ -209,53 +220,6 @@ $(function () {
 });
 
 /**
- * !Testing form validation (for example). Do not use on release!
- * */
-function formSuccessExample() {
-	var $form = $('.user-form form');
-
-	if ( $form.length ) {
-
-		$form.submit(function (event) {
-			var $thisForm = $(this);
-
-			if ($thisForm.parent().hasClass('success-form')) return;
-
-			event.preventDefault();
-
-			testValidateForm($thisForm);
-		});
-
-	}
-
-	function testValidateForm(form) {
-		var $thisFormWrap = form.parent();
-
-		var $inputs = $(':text, input[type="email"], input[type="password"], textarea', form);
-
-		var inputsLength = $inputs.length;
-		var inputsHasValueLength = $inputs.filter(function () {
-			return $(this).val().length;
-		}).length;
-
-		$thisFormWrap.toggleClass('error-form', inputsLength !== inputsHasValueLength);
-		$thisFormWrap.toggleClass('success-form', inputsLength === inputsHasValueLength);
-
-		$.each($inputs, function () {
-			var $thisInput = $(this);
-			var thisInputVal = $thisInput.val();
-			var $thisInputWrap = $thisInput.parent();
-
-			$thisInput.toggleClass('error', !thisInputVal.length);
-			$thisInput.toggleClass('success', !!thisInputVal.length);
-
-			$thisInputWrap.toggleClass('error', !thisInputVal.length);
-			$thisInputWrap.toggleClass('success', !!thisInputVal.length);
-		});
-	}
-}
-
-/**
  * =========== !ready document, load/resize window ===========
  */
 
@@ -273,6 +237,5 @@ $(document).ready(function () {
 	objectFitImages(); // object-fit-images initial
 	stickyInit();
 	toggleShutters();
-
-	formSuccessExample();
+	parallaxInit();
 });
