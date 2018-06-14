@@ -558,10 +558,10 @@ i b, i strong, em b, em strong, b i, b em, strong i, strong em {
 }
 
 .enter {
-	font-family: "AkzidenzGroteskPro Light Cond", sans-serif;
+	font-family: "AkzidenzGroteskPro Cond", sans-serif;
 	font-weight: normal;
 	font-style: normal;
-	font-size: 2.4rem;
+	font-size: 2.2rem;
 	line-height: 1.25;
 	text-align: center;
 	max-width: 960px;
@@ -1283,10 +1283,10 @@ i b, i strong, em b, em strong, b i, b em, strong i, strong em {
 }
 
 .prod-descr p {
-	font-family: "AkzidenzGroteskPro Light Cond", sans-serif;
+	font-family: "AkzidenzGroteskPro Cond", sans-serif;
 	font-weight: normal;
 	font-style: normal;
-	font-size: 2.4rem;
+	font-size: 2.2rem;
 	line-height: 1.25;
 }
 
@@ -1310,9 +1310,9 @@ i b, i strong, em b, em strong, b i, b em, strong i, strong em {
 .prod-descr table {
 	width: 100%;
 	margin-bottom: 3rem;
-	font-size: 2.4rem;
+	font-size: 2.2rem;
 	line-height: 1.25;
-	font-family: "AkzidenzGroteskPro Light Cond", sans-serif;
+	font-family: "AkzidenzGroteskPro Cond", sans-serif;
 	font-weight: normal;
 	font-style: normal;
 }
