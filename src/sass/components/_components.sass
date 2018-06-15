@@ -245,10 +245,11 @@
 	margin-right: -#{nth($page-layout-space, 2)}
 	position: relative
 	position: sticky
+	overflow: hidden
 	top: $header-height
 	float: right
 
-	+media('<desk-md')
+	+media('<desk-sm')
 		width: calc(50% + #{nth($page-layout-space--md, 2)})
 		margin-right: -#{nth($page-layout-space--md, 2)}
 
@@ -318,6 +319,107 @@
 		width: 380px
 		height: 380px
 
+.prod-prev, .prod-next
+	position: absolute
+	width: 120px
+	top: 50%
+	text-decoration: none
+	color: currentColor
+	z-index: 10
+	user-select: none
+	-webkit-tap-highlight-color: transparent
+	$prop: opacity, visibility
+	opacity: 0.5
+	will-change: $prop
+	transition:
+		property: $prop
+		duration: $animation-speed
+
+	+media('<desk-sm')
+		width: 100px
+
+	+media('<tab-lg')
+		+size(90px)
+		opacity: 1
+
+	+media('<mob-md')
+		+size(60px, 100px)
+
+	img
+		position: relative
+
+	svg
+		display: block
+		+size(30px)
+		position: absolute
+		top: 50%
+		margin: -15px 50px 0
+		pointer-events: none
+		$prop: transform, opacity, visibility
+		opacity: 0
+		visibility: hidden
+		will-change: $prop
+		transition:
+			property: $prop
+			duration: $animation-speed
+
+		+media('<desk-lg')
+			+margin-horizontal(20px)
+
+		+media('<tab-lg')
+			opacity: 1
+			visibility: visible
+			+margin-horizontal(-15px)
+
+	path
+		fill: currentColor
+
+.prod-prev
+	left: 0
+	transform: translate(-50%, -50%)
+
+	+media('<tab-lg')
+		transform: translate(0, -50%)
+
+	svg
+		left: 100%
+		transform: rotate(0.25turn)
+
+		+media('<tab-lg')
+			left: 50%
+
+.prod-next
+	right: 0
+	transform: translate(50%, -50%)
+
+	+media('<tab-lg')
+		transform: translate(0, -50%)
+
+	svg
+		right: 100%
+		transform: rotate(-0.25turn)
+
+		+media('<tab-lg')
+			right: 50%
+
+// hover
+.prod-prev, .prod-next
+	.touchevents &, .no-touchevents &:hover
+		opacity: 1
+
+.prod-prev
+	.touchevents &, .no-touchevents &:hover
+		svg
+			opacity: 1
+			visibility: visible
+
+.prod-next
+	.touchevents &, .no-touchevents &:hover
+		svg
+			opacity: 1
+			visibility: visible
+
+// products awards
 .prod-icons
 	padding-bottom: 40px
 
@@ -418,9 +520,8 @@
 				min-width: $th-right-width
 
 .prod-descr-circle
-	height: 220px
-	width: 220px
-	border-radius: 200px
+	+size(280px)
+	border-radius: 280px
 	position: absolute
 	top: 50%
 	left: 50%
@@ -441,7 +542,11 @@
 .prod-descr-image
 	display: none
 	position: relative
-	margin-bottom: 3rem
+	margin: 0 -#{nth($page-layout-space--sm, 2)} 3rem
+	overflow: hidden
+
+	+media('<mob-lg')
+		+margin-horizontal(-#{nth($page-layout-space--mob, 2)})
 
 	figure
 		position: relative
@@ -464,16 +569,21 @@
 
 /* scene
 .scene
-	position: absolute
+	position: fixed
 	overflow: hidden
 	left: 0
 	top: 0
 	width: 100%
 	height: 100%
-	z-index: 9999
+	z-index: -1
 	user-select: none
 	-webkit-tap-highlight-color: transparent
 	pointer-events: none
+
+	.sep-page &
+		position: absolute
+		top: 0
+		z-index: 9999
 
 	.touchevents &
 		display: none
@@ -490,5 +600,18 @@
 
 		img
 			position: absolute
+
+		+media('<tab-lg')
+			&:nth-child(2)
+				img
+					left: auto !important
+					top: 38vh !important
+					right: 40px
+
+			&:nth-child(3)
+				img
+					left: auto !important
+					top: 45vh !important
+					right: -10px
 
 /* scene end

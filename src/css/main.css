@@ -652,8 +652,8 @@ i b, i strong, em b, em strong, b i, b em, strong i, strong em {
 /* button toggle menu */
 .btn-menu {
 	display: none;
-	width: 60px;
-	height: 60px;
+	width: 50px;
+	height: 50px;
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -1145,11 +1145,12 @@ i b, i strong, em b, em strong, b i, b em, strong i, strong em {
 	position: relative;
 	position: -webkit-sticky;
 	position: sticky;
+	overflow: hidden;
 	top: 50px;
 	float: right;
 }
 
-@media (max-width: 1365px) {
+@media (max-width: 1279px) {
 	.prod-image {
 		width: calc(50% + 100px);
 		margin-right: -100px;
@@ -1253,6 +1254,148 @@ i b, i strong, em b, em strong, b i, b em, strong i, strong em {
 	}
 }
 
+.prod-prev, .prod-next {
+	position: absolute;
+	width: 120px;
+	top: 50%;
+	text-decoration: none;
+	color: currentColor;
+	z-index: 10;
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+	    -ms-user-select: none;
+	        user-select: none;
+	-webkit-tap-highlight-color: transparent;
+	opacity: 0.5;
+	will-change: opacity, visibility;
+	transition-property: opacity, visibility;
+	transition-duration: 0.2s;
+}
+
+@media (max-width: 1279px) {
+	.prod-prev, .prod-next {
+		width: 100px;
+	}
+}
+
+@media (max-width: 991px) {
+	.prod-prev, .prod-next {
+		width: 90px;
+		height: 90px;
+		opacity: 1;
+	}
+}
+
+@media (max-width: 479px) {
+	.prod-prev, .prod-next {
+		width: 60px;
+		height: 100px;
+	}
+}
+
+.prod-prev img, .prod-next img {
+	position: relative;
+}
+
+.prod-prev svg, .prod-next svg {
+	display: block;
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	top: 50%;
+	margin: -15px 50px 0;
+	pointer-events: none;
+	opacity: 0;
+	visibility: hidden;
+	will-change: transform, opacity, visibility;
+	transition-property: transform, opacity, visibility;
+	transition-duration: 0.2s;
+}
+
+@media (max-width: 1599px) {
+	.prod-prev svg, .prod-next svg {
+		margin-right: 20px;
+		margin-left: 20px;
+	}
+}
+
+@media (max-width: 991px) {
+	.prod-prev svg, .prod-next svg {
+		opacity: 1;
+		visibility: visible;
+		margin-right: -15px;
+		margin-left: -15px;
+	}
+}
+
+.prod-prev path, .prod-next path {
+	fill: currentColor;
+}
+
+.prod-prev {
+	left: 0;
+	-ms-transform: translate(-50%, -50%);
+	    transform: translate(-50%, -50%);
+}
+
+@media (max-width: 991px) {
+	.prod-prev {
+		-ms-transform: translate(0, -50%);
+		    transform: translate(0, -50%);
+	}
+}
+
+.prod-prev svg {
+	left: 100%;
+	-ms-transform: rotate(0.25turn);
+	    transform: rotate(0.25turn);
+}
+
+@media (max-width: 991px) {
+	.prod-prev svg {
+		left: 50%;
+	}
+}
+
+.prod-next {
+	right: 0;
+	-ms-transform: translate(50%, -50%);
+	    transform: translate(50%, -50%);
+}
+
+@media (max-width: 991px) {
+	.prod-next {
+		-ms-transform: translate(0, -50%);
+		    transform: translate(0, -50%);
+	}
+}
+
+.prod-next svg {
+	right: 100%;
+	-ms-transform: rotate(-0.25turn);
+	    transform: rotate(-0.25turn);
+}
+
+@media (max-width: 991px) {
+	.prod-next svg {
+		right: 50%;
+	}
+}
+
+.touchevents .prod-prev, .no-touchevents .prod-prev:hover, .touchevents .prod-next, .no-touchevents .prod-next:hover {
+	opacity: 1;
+}
+
+.touchevents .prod-prev svg, .no-touchevents .prod-prev:hover svg {
+	opacity: 1;
+	visibility: visible;
+}
+
+.touchevents .prod-next svg, .no-touchevents .prod-next:hover svg {
+	opacity: 1;
+	visibility: visible;
+}
+
 .prod-icons {
 	padding-bottom: 40px;
 }
@@ -1352,9 +1495,9 @@ tr:last-child .prod-descr table td {
 }
 
 .prod-descr-circle {
-	height: 220px;
-	width: 220px;
-	border-radius: 200px;
+	width: 280px;
+	height: 280px;
+	border-radius: 280px;
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -1380,7 +1523,15 @@ tr:last-child .prod-descr table td {
 .prod-descr-image {
 	display: none;
 	position: relative;
-	margin-bottom: 3rem;
+	margin: 0 -30px 3rem;
+	overflow: hidden;
+}
+
+@media (max-width: 639px) {
+	.prod-descr-image {
+		margin-right: -20px;
+		margin-left: -20px;
+	}
 }
 
 .prod-descr-image figure {
@@ -1405,19 +1556,25 @@ tr:last-child .prod-descr table td {
 /* product end */
 /* scene */
 .scene {
-	position: absolute;
+	position: fixed;
 	overflow: hidden;
 	left: 0;
 	top: 0;
 	width: 100%;
 	height: 100%;
-	z-index: 9999;
+	z-index: -1;
 	-webkit-user-select: none;
 	   -moz-user-select: none;
 	    -ms-user-select: none;
 	        user-select: none;
 	-webkit-tap-highlight-color: transparent;
 	pointer-events: none;
+}
+
+.sep-page .scene {
+	position: absolute;
+	top: 0;
+	z-index: 9999;
 }
 
 .touchevents .scene {
@@ -1440,6 +1597,19 @@ tr:last-child .prod-descr table td {
 
 .scene > div img {
 	position: absolute;
+}
+
+@media (max-width: 991px) {
+	.scene > div:nth-child(2) img {
+		left: auto !important;
+		top: 38vh !important;
+		right: 40px;
+	}
+	.scene > div:nth-child(3) img {
+		left: auto !important;
+		top: 45vh !important;
+		right: -10px;
+	}
 }
 
 /* scene end */
